@@ -1,2 +1,21 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<% unless user_signed_in? %> 
+   <h1>Welcome to ShareBox</h1> 
+   <p>File sharing web application you can't ignore.</p> 
+     
+<% else %> 
+  
+   <div class="asset_list_header"> 
+       <div class="file_name_header">File Name</div> 
+       <div class="file_size_header">Size</div> 
+       <div class="file_last_updated_header">Modified</div> 
+   </div> 
+   <div class="asset_list"> 
+       <% @documents.each do |document| %> 
+           <div class="asset_details"> 
+               <div class="file_name"><%= image_tag document.uploaded_file.url(:thumb) %></div> 
+               <div class="file_size"><%= number_to_human_size(document.file_size, :precision => 2)%></div> 
+               <div class="file_last_updated"><%= document.uploaded_file_updated_at %></div> 
+           </div> 
+       <% end %> 
+   </div> 
+<% end %>

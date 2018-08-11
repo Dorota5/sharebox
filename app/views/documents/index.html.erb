@@ -20,8 +20,10 @@
         <td><%= image_tag document.uploaded_file.url(:medium) %></td>
         <td><%= link_to 'Download', download_url(document) %></td>
         <td><%= link_to 'Show', document %></td>
-        <td><%= link_to 'Edit', edit_document_path(document) %></td>
-        <td><%= link_to 'Destroy', document, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if document.user == current_user %>
+          <td><%= link_to 'Edit', edit_document_path(document) %></td>  
+          <td><%= link_to 'Destroy', document, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

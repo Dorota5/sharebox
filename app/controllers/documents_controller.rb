@@ -1,5 +1,6 @@
 class DocumentsController < ApplicationController
   before_action :set_document, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
 
   def index
     @documents = current_user.documents
@@ -45,6 +46,9 @@ class DocumentsController < ApplicationController
     @document = current_user.documents.find_by_id(params[:id]) 
     if @document 
          send_file @document.uploaded_file.path, :type => @document.uploaded_file_content_type 
+    else
+      flash[:error] = "Can't download.."
+      redirect_to documents_path 
     end
   end
 
