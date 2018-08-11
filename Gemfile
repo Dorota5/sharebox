@@ -20,6 +20,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 #for user authentication 
 gem 'devise'
   
+gem "paperclip", "~> 6.0.0"
+
 #for layout and helpers generations 
 gem "nifty-generators", :group => :development
 

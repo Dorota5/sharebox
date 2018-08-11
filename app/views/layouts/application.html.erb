@@ -7,6 +7,23 @@
     <%= csrf_meta_tag %>
     <%= yield(:head) %>
   </head>
+  <div class="header_wrapper"> 
+    <div class="logo"> 
+        <%= link_to "ShareBox", root_url %> 
+    </div> 
+    <div id="login_user_status"> 
+    <% if user_signed_in? %> 
+        <%= current_user.email  %>  
+        | 
+        <%= link_to "Sign out", destroy_user_session_path %> 
+    <% else %> 
+        <em>Not Signed in.</em> 
+        <%= link_to 'Sign in', new_user_session_path%> 
+        or 
+        <%= link_to 'Sign up', new_user_registration_path%> 
+    <% end %> 
+</div>
+  </div>
   <body>
     <div id="container">
       <p class="notice"><%= notice %></p>
