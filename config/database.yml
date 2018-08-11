@@ -54,7 +54,7 @@ development:
   database: sharebox_development 
   pool: 5
   username: root 
-  password: password
+  password: 
   socket: /var/run/mysqld/mysqld.sock
 
 test: 
@@ -64,7 +64,7 @@ test:
   database: sharebox_test 
   pool: 5
   username: root 
-  password: password
+  password: 
   socket: /var/run/mysqld/mysqld.sock
 
 production:
