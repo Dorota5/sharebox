@@ -6,6 +6,8 @@
 </p>
     
   <div><%= image_tag @document.uploaded_file.url(:medium) %></div>
+  
+<%= link_to 'Download', download_url(@document) %>
 
 <%= link_to 'Edit', edit_document_path(@document) %> |
 <%= link_to 'Back', documents_path %>

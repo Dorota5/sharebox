@@ -1,28 +1,20 @@
 class DocumentsController < ApplicationController
   before_action :set_document, only: [:show, :edit, :update, :destroy]
 
-  # GET /documents
-  # GET /documents.json
   def index
     @documents = current_user.documents
   end
 
-  # GET /documents/1
-  # GET /documents/1.json
   def show
   end
 
-  # GET /documents/new
   def new
     @document = current_user.documents.new
   end
 
-  # GET /documents/1/edit
   def edit
   end
 
-  # POST /documents
-  # POST /documents.json
   def create
     @document = current_user.documents.new(document_params)
 
@@ -37,8 +29,6 @@ class DocumentsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /documents/1
-  # PATCH/PUT /documents/1.json
   def update
     respond_to do |format|
       if @document.update(document_params)
@@ -49,15 +39,15 @@ class DocumentsController < ApplicationController
         format.json { render json: @document.errors, status: :unprocessable_entity }
       end
     end
-    # if @document.update(document_params)
-    #   redirect_to  @document, notice: 'Document was successfully updated.' }
-    # else
-    #   render :new
-    # end
   end
 
-  # DELETE /documents/1
-  # DELETE /documents/1.json
+  def download 
+    @document = current_user.documents.find_by_id(params[:id]) 
+    if @document 
+         send_file @document.uploaded_file.path, :type => @document.uploaded_file_content_type 
+    end
+  end
+
   def destroy
     @document.destroy
     respond_to do |format|
@@ -67,12 +57,10 @@ class DocumentsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_document
       @document = current_user.documents.find(params[:id]) 
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def document_params
       params.require(:document).permit(:user_id, :uploaded_file)
     end
